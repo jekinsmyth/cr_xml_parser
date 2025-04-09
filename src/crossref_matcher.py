@@ -55,15 +55,17 @@ class crossref_matcher:
             response = requests.get(url)
             data = json.loads(response.text)
             
-            retrieved_citation = self.make_harvard_citation(data['message']['items'][0])
-            ratio_score = fuzz.ratio(ref, retrieved_citation)
-            
-            if ratio_score < 50:
-                ## LLM to determine whether it is a match
-                print(ref)
-                print(retrieved_citation)
-                print(ratio_score)
-                print('-'*len(ref))
-            
+            try:
+                retrieved_citation = self.make_harvard_citation(data['message']['items'][0])
+                ratio_score = fuzz.ratio(ref, retrieved_citation)
+                
+                if ratio_score < 50:
+                    ## LLM to determine whether it is a match
+                    print(ref)
+                    print(retrieved_citation)
+                    print(ratio_score)
+                    print('-'*len(ref))
+            except:
+                continue
             time.sleep(0.2)
             gc.collect()
