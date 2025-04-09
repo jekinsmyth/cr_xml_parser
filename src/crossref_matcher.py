@@ -3,15 +3,12 @@ import json
 import time
 from fuzzywuzzy import fuzz
 import gc
-import pandas as pd
-
-
+from llm import LLM
 
 class crossref_matcher:
-    def __init__(self, path):
-        self.path = path
-        self.df = pd.read_csv(self.path)
-
+    def __init__(self, df):
+        self.df = df
+        self.llm = LLM(model_name='meta-llama/Meta-Llama-3.1-8B-Instruct', quantization=True)
 
     def make_harvard_citation(self, retrieved_data):
         """
@@ -59,11 +56,14 @@ class crossref_matcher:
             ratio_score = fuzz.ratio(ref, retrieved_citation)
             
             if ratio_score < 50:
-                ## LLM to determine whether it is a match
-                print(ref)
-                print(retrieved_citation)
+
+                print(f'original: {ref}')
+                print(f'crossref: {retrieved_citation}')
                 print(ratio_score)
+                print(self.llm.instruct_model(ref, retrieved_citation))
                 print('-'*len(ref))
+
+
             
             time.sleep(0.2)
             gc.collect()

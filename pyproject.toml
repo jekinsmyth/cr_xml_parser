@@ -5,10 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "accelerate>=1.6.0",
+    "bitsandbytes>=0.45.5",
+    "fuzzywuzzy>=0.18.0",
     "lxml>=5.3.2",
     "pandas>=2.2.3",
+    "requests>=2.32.3",
     "torch>=2.6.0",
     "torchvision>=0.21.0",
+    "transformers>=4.51.1",
 ]
 
 [tool.ruff]
