@@ -1,0 +1,21 @@
+[project]
+name = "cr-xml-parser"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "lxml>=5.3.2",
+    "pandas>=2.2.3",
+]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+include = ["src"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
